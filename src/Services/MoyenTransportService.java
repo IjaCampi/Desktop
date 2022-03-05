@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pi.ijacampi.entites.Moyen_Transport;
+import entites.Moyen_Transport;
 
 
 /**
@@ -24,18 +24,14 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
 
     @Override
     public void ajouter(Moyen_Transport e) throws SQLException{
-        String req="INSERT INTO moyen_transport (id_user,type,matricule,marque,image,nbr_place) VALUES (?,?,?,?,?,?)";
+        String req="INSERT INTO moyen_transport (type,matricule,marque,nbr_place) VALUES (?,?,?,?)";
        
-    try {
             PreparedStatement pst = cnx.prepareStatement(req,Statement.RETURN_GENERATED_KEYS);
 
-            
-            pst.setInt(1, e.getId_user());
-            pst.setString(2, e.getType());
-            pst.setString(3, e.getMatricule());
-            pst.setString(4, e.getMarque());
-            pst.setString(5, e.getImage());
-            pst.setInt(6, e.getNbr_place());
+            pst.setString(1, e.getType());
+            pst.setString(2, e.getMatricule());
+            pst.setString(3, e.getMarque());
+            pst.setInt(4, e.getNbr_place());
             pst.executeUpdate();
             ResultSet res=pst.getGeneratedKeys();
             while(res.next())
@@ -43,47 +39,35 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
                e.setId_transport(res.getInt(1));
             }
             System.out.println("Moyen Transport bien Ajouté");
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
     }
 
     @Override
     public void supprimer(Moyen_Transport e) throws SQLException{
-        try {
-            PreparedStatement preparedStmt = cnx.prepareStatement("DELETE FROM moyen_transport WHERE id_transport= ?");
+
+            PreparedStatement preparedStmt = cnx.prepareStatement("DELETE FROM moyen_transport WHERE matricule= ?");
             
-            preparedStmt.setInt(1, e.getId_transport());
+            preparedStmt.setString(1, e.getMatricule());
             
             preparedStmt.executeUpdate();
             
             System.out.println("Moyen Transport bien Supprimé");
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-        } 
 
 
     }
 
     @Override
     public void modifier(Moyen_Transport e) throws SQLException{
-        try {
-            PreparedStatement preparedStmt = cnx.prepareStatement("UPDATE moyen_transport SET id_user=?,type=?,matricule=?,marque=?,image=?,nbr_place=?  WHERE id_transport=?");
+
+            PreparedStatement preparedStmt = cnx.prepareStatement("update moyen_transport set type=?,matricule=?,marque=?,nbr_place=?  WHERE id_transport=?");
             
             preparedStmt.setInt(1, e.getId_transport());
-            preparedStmt.setInt(2, e.getId_user());
-            preparedStmt.setString(3, e.getType());
-            preparedStmt.setString(4, e.getMatricule());
-            preparedStmt.setString(5, e.getMarque());
-            preparedStmt.setString(7, e.getImage());
-            preparedStmt.setInt(6, e.getNbr_place());
-            preparedStmt.executeUpdate();
+            preparedStmt.setString(2, e.getType());
+            preparedStmt.setString(3, e.getMatricule());
+            preparedStmt.setString(4, e.getMarque());
+            preparedStmt.setInt(5, e.getNbr_place());
+            preparedStmt.execute();
             
             System.out.println("Moyen Transport bien Modifié");
-            
-        } catch (Exception ex) {
-            System.err.println(ex.getMessage());
-        }
         
     }
 
@@ -92,35 +76,25 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
         
         ArrayList<Moyen_Transport> lesMoyensT = new ArrayList<>();
 
-        try {
-            
+
             String req="SELECT * FROM moyen_transport";
             Statement st = cnx.createStatement();
             ResultSet rst = st.executeQuery(req);
             
             while (rst.next()){
-                
-                Moyen_Transport moyenT = new Moyen_Transport();
-                
-                moyenT.setId_transport(rst.getInt("id_transport"));
-                moyenT.setType(rst.getString("type"));
-                moyenT.setMatricule(rst.getString("matricule"));
-                moyenT.setMarque(rst.getString("marque"));
-                moyenT.setImage(rst.getString("image"));
-                moyenT.setNbr_place(rst.getInt("nbr_place"));
-                moyenT.setId_user(rst.getInt("id_user"));
-                
-                lesMoyensT.add(moyenT);
+                   int id = rst.getInt("id_transport");
+                String type = rst.getString("type");
+                String matricule = rst.getString("matricule");
+                String marque = rst.getString("marque");
+                int nbr_place = rst.getInt("nbr_place");
+                Moyen_Transport moyen = new Moyen_Transport(id,type,matricule,marque,nbr_place);
+                lesMoyensT.add(moyen);
+                System.out.println(lesMoyensT);
 
             }
             
-            st.executeQuery(req);
-            
-        } catch (SQLException ex) {
-            ex.getMessage();
-        }
-        
-        
+           
+           
         return lesMoyensT;
 
     }
@@ -128,8 +102,6 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
     public ArrayList<Moyen_Transport> trierNbrPlaces() throws SQLException {
         
         ArrayList<Moyen_Transport> lesMoyensTriers = new ArrayList<>();
-        
-        try {
 
      String req = "SELECT * FROM moyen_transport order by nbr_place desc";
             Statement st = cnx.createStatement();
@@ -142,9 +114,6 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
                 
                 lesMoyensTriers.add(moyenT);
 }
-}       catch (SQLException ex) {
-            ex.getMessage();
-        }
         
         return lesMoyensTriers;
     }
@@ -155,8 +124,6 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
         
         ArrayList<Moyen_Transport> lesMoyensRech = new ArrayList<>();
         
-        try {
-
      String req = "SELECT * FROM moyen_transport WHERE nbr_place=?";
      
             PreparedStatement preparedStmt = cnx.prepareStatement(req);
@@ -169,11 +136,7 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
                 moyenT.setNbr_place(rst.getInt("nbr_place"));
                 
                 lesMoyensRech.add(moyenT);
-}
-}       catch (SQLException ex) {
-            ex.getMessage();
-        }
-        
+}     
         return lesMoyensRech;
         
     }
@@ -183,7 +146,6 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
 
         ArrayList<Moyen_Transport> lesMoyensRech = new ArrayList<>();
         
-        try {
 
      String req = "SELECT * FROM moyen_transport WHERE marque=?";
      
@@ -198,9 +160,6 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
                 
                 lesMoyensRech.add(moyenT);
 }
-}       catch (SQLException ex) {
-            ex.getMessage();
-        }
         
         return lesMoyensRech;
     }
@@ -211,8 +170,6 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
         
         
         ArrayList<Moyen_Transport> lesMoyensTriers = new ArrayList<>();
-        
-        try {
 
      String req = "SELECT * FROM moyen_transport order by marque";
             Statement st = cnx.createStatement();
@@ -225,13 +182,11 @@ public class MoyenTransportService implements IServices<Moyen_Transport>{
                 
                 lesMoyensTriers.add(moyenT);
 }
-}       catch (SQLException ex) {
-            ex.getMessage();
-        }
         
         return lesMoyensTriers;
 
     }
-
-   
+    
+    
+    
 }

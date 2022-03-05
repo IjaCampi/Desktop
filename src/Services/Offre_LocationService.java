@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import pi.ijacampi.entites.Offre_Location;
+import entites.Offre_Location;
 
 /**
  *
@@ -20,72 +20,63 @@ public class Offre_LocationService implements IServices<Offre_Location>{
     Connection cnx = DBConnexion.getInstance().getCnx();
 
     @Override
-    public void ajouter(Offre_Location entity) {
-        
-        try {
-            String req="INSERT INTO offre_location(date_debut,date_fin,frais,etat,id_transport) VALUES(?,?,?,?,?)";
+    public void ajouter(Offre_Location entity) throws SQLException {
+
+            String req="INSERT INTO offre_location(date_debut,date_fin,frais,etat,num_tel) VALUES(?,?,?,?,?)";
             
-            PreparedStatement pst = cnx.prepareStatement(req);
+            PreparedStatement pst = cnx.prepareStatement(req,Statement.RETURN_GENERATED_KEYS);
             
-            pst.setDate(1, entity.getDate_debut());
-            pst.setDate(2, entity.getDate_fin());
+            pst.setString(1, entity.getDate_debut());
+            pst.setString(2, entity.getDate_fin());
             pst.setDouble(3, entity.getFrais());
             pst.setString(4, entity.getEtat());
-            pst.setInt(5, entity.getId_transport());
-            
-            System.out.println("Offre Location bien Ajouté");
+            pst.setString(5, entity.getNum_tel());
             
             pst.executeUpdate();
             
+            ResultSet res=pst.getGeneratedKeys();
+            while(res.next())
+            {
+               entity.setId_offrelocation(res.getInt(1));
+            }
             
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        
+            
+            System.out.println("Offre Location bien Ajouté");
+
     }
 
     @Override
-    public void supprimer(Offre_Location entity) {
-        
-        try {
-            String req="DELETE FROM offre_location WHERE id_offrelocation=?";
-            PreparedStatement pst = cnx.prepareStatement(req);
+    public void supprimer(Offre_Location e) throws SQLException {
+
+            PreparedStatement preparedStmt = cnx.prepareStatement("DELETE FROM offre_location WHERE num_tel= ?");
             
-            pst.setInt(1, entity.getId_offrelocation());
+            System.out.println(e.getNum_tel());
+            preparedStmt.setString(1, e.getNum_tel());
             
-            pst.executeUpdate();
+            preparedStmt.executeUpdate();
             
             System.out.println("Offre Location bien Supprimé");
-            
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        
     }
     
 
     @Override
-    public void modifier(Offre_Location entity) {
+    public void modifier(Offre_Location entity) throws SQLException {
         
-         try {
-            String req="UPDATE offre_location SET date_debut=?,date_fin=?,frais=?,etat=?,id_transport=? WHERE id_offrelocation=?";
-            
-            PreparedStatement pst = cnx.prepareStatement(req);
-            
-            pst.setInt(1, entity.getId_offrelocation());
-            pst.setDate(2, entity.getDate_debut());
-            pst.setDate(3, entity.getDate_fin());
+
+             
+            PreparedStatement pst = cnx.prepareStatement("UPDATE offre_location SET `num_tel`=?, `date_debut`=?,`date_fin`=?,`frais`=?,etat=? WHERE num_tel=?");
+
+            pst.setString(1, entity.getNum_tel());
+            pst.setString(2, entity.getDate_debut());
+            pst.setString(3, entity.getDate_fin());
             pst.setDouble(4, entity.getFrais());
             pst.setString(5, entity.getEtat());
-            pst.setInt(6, entity.getId_transport());
+            pst.setInt(6, entity.getId_offrelocation());
             
             pst.executeUpdate();
             
             System.out.println("Moyen Transport bien Modifié");
             
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
         
 
     }
@@ -105,13 +96,13 @@ public class Offre_LocationService implements IServices<Offre_Location>{
             while (rst.next()){
                 
                 Offre_Location offre = new Offre_Location();
-                
                 offre.setId_offrelocation(rst.getInt("id_offrelocation"));
-                offre.setDate_debut(rst.getDate("date_debut"));
-                offre.setDate_fin(rst.getDate("date_fin"));
+                offre.setEtat(rst.getString("etat"));
+                offre.setNum_tel(rst.getString("num_tel"));
+                offre.setDate_debut(rst.getString("date_debut"));
+                offre.setDate_fin(rst.getString("date_fin"));
                 offre.setFrais(rst.getDouble("frais"));
                 offre.setEtat(rst.getString("etat"));
-                offre.setId_transport(rst.getInt("id_transport"));
                 lesOffres.add(offre);
             }
             
@@ -185,14 +176,14 @@ public class Offre_LocationService implements IServices<Offre_Location>{
      String req = "SELECT * FROM offre_location WHERE date_debut=?";
      
             PreparedStatement preparedStmt = cnx.prepareStatement(req);
-            preparedStmt.setDate(1, e.getDate_debut());
+            preparedStmt.setString(1, e.getDate_debut());
             ResultSet rst = preparedStmt.executeQuery();
 
             while(rst.next()) {
                 
                 Offre_Location offreLoc = new Offre_Location();
                 
-                offreLoc.setDate_debut(rst.getDate("date_debut"));
+                offreLoc.setDate_debut(rst.getString("date_debut"));
                 
                 lesOffresRech.add(offreLoc);
 }
@@ -219,7 +210,7 @@ public class Offre_LocationService implements IServices<Offre_Location>{
                 
                 Offre_Location offreLoc = new Offre_Location();
                 
-                offreLoc.setDate_debut(rst.getDate("etat"));
+                offreLoc.setDate_debut(rst.getString("etat"));
                 
                 lesOffresRech.add(offreLoc);
 }
