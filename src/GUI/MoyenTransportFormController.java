@@ -167,14 +167,14 @@ public class MoyenTransportFormController implements Initializable {
         alert.setHeaderText("Ajoutée");
         alert.setContentText("Moyen Transport bien Ajoutée..");
         
+        listMoyenT.clear();
+        afficher();
+        
         tftype.setText("");
         tfmatricule.setText("");
         tfmarque.setText("");
         tfnbrplaces.setText("");
         
-        
-        listMoyenT.clear();
-        afficher();
         
         }catch (SQLException ex) {
             alert.setAlertType(Alert.AlertType.ERROR);
