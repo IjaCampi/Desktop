@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -33,7 +34,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Label layoutX="46.0" layoutY="239.0" prefHeight="38.0" prefWidth="159.0" text="Disponibilitée">
+      <Label layoutX="47.0" layoutY="251.0" prefHeight="38.0" prefWidth="159.0" text="Disponibilitée">
          <font>
             <Font size="26.0" />
          </font>
@@ -48,13 +49,17 @@
       <Button fx:id="ajouterid" layoutX="432.0" layoutY="339.0" mnemonicParsing="false" onAction="#ajouterHebergement" prefHeight="47.0" prefWidth="125.0" text="Ajouter" />
       <TextField fx:id="categorieid" layoutX="280.0" layoutY="168.0" />
       <TextField fx:id="capaciteid" layoutX="280.0" layoutY="206.0" />
-      <TextField fx:id="disponibiliteid" layoutX="280.0" layoutY="245.0" />
       <TextField fx:id="prixid" layoutX="280.0" layoutY="296.0" />
       <Text fontSmoothingType="LCD" layoutX="121.0" layoutY="61.0" stroke="#4d0a0a" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un hébergement">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
-      <Text layoutX="46.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(1=disponible / 0=non disponible)" />
+      <Text layoutX="46.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      
+      <ToggleButton fx:id="dispoid" layoutX="258.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleToggleYesAction" prefHeight="31.0" prefWidth="85.0" text="Disponible" />
+      <ToggleButton fx:id="nondispoid" layoutX="390.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleToggleNoAction" prefHeight="31.0" prefWidth="85.0" text="Non Disponible" />
+
+      
    </children>
 </AnchorPane>

@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane fx:id="pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.DetailsHebergementClientController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass">
@@ -63,7 +62,7 @@
                   <TextField fx:id="capaciteid2" layoutX="145.0" layoutY="205.0" />
                   <TextField fx:id="disponibiliteid2" layoutX="191.0" layoutY="249.0" />
                   <TextField fx:id="prixid2" layoutX="84.0" layoutY="293.0" />
-                  <Button fx:id="reserverid" layoutX="380.0" layoutY="150.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="197.0" text="Reserver " />
+                  <Button fx:id="reserverid" layoutX="380.0" layoutY="150.0" mnemonicParsing="false" onAction="#reserver" prefHeight="68.0" prefWidth="197.0" text="Reserver " />
                </children>
             </AnchorPane>
          </children>
