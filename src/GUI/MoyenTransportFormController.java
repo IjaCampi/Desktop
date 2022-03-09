@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import entites.Moyen_Transport;
+import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -87,6 +88,12 @@ public class MoyenTransportFormController implements Initializable {
     private TextField tfId;
     @FXML
     private ComboBox<String> combobox;
+    @FXML
+    private TableColumn<Moyen_Transport, Double> tvfrais;
+    @FXML
+    private Label lbnbrplaces1;
+    @FXML
+    private TextField tffrais;
 
 
     /**
@@ -102,6 +109,7 @@ public class MoyenTransportFormController implements Initializable {
         tvmatricule.setSortType(TableColumn.SortType.ASCENDING);
         tvmarque.setSortType(TableColumn.SortType.ASCENDING);
         tvnbrplaces.setSortType(TableColumn.SortType.ASCENDING);
+        tvfrais.setSortType(TableColumn.SortType.ASCENDING);
 
         
         tvtype.setCellValueFactory(new PropertyValueFactory<Moyen_Transport, String>("type"));
@@ -115,6 +123,9 @@ public class MoyenTransportFormController implements Initializable {
         
         tvnbrplaces.setCellValueFactory(new PropertyValueFactory<Moyen_Transport, Integer>("nbr_place"));
         System.out.println(tvnbrplaces.getCellData(3));
+        
+        tvfrais.setCellValueFactory(new PropertyValueFactory<Moyen_Transport, Double>("frais"));
+        System.out.println(tvfrais.getCellData(4));
         
         clId.setCellValueFactory(new PropertyValueFactory<Moyen_Transport, Integer>("id_transport"));
         clId.setVisible(false);
@@ -146,21 +157,21 @@ public class MoyenTransportFormController implements Initializable {
         String matricule = tfmatricule.getText();
         String marque = tfmarque.getText();
         int nbr_place = parseInt(tfnbrplaces.getText());
+        Double frais = parseDouble(tffrais.getText());
         
-        Moyen_Transport moyt = new Moyen_Transport(nbr_place, type, matricule, marque);
+        Moyen_Transport moyt = new Moyen_Transport(nbr_place, type, matricule, marque,frais);
         MoyenTransportService moyTSer = new MoyenTransportService();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         
-        if(type.isEmpty() || matricule.isEmpty() || marque.isEmpty()){
+        if(type.isEmpty() || matricule.isEmpty() || marque.isEmpty() || frais.isNaN()){
         
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Erreur..!");
             alert.setHeaderText(null);
             alert.setContentText("Vous devez remplir les champs..!");
             alert.showAndWait();
-        }
-        
-        try{
+        }else {
+                   try{
             
         moyTSer.ajouter(moyt);
         alert.setTitle("Succée");
@@ -174,6 +185,7 @@ public class MoyenTransportFormController implements Initializable {
         tfmatricule.setText("");
         tfmarque.setText("");
         tfnbrplaces.setText("");
+        tffrais.setText("");
         
         
         }catch (SQLException ex) {
@@ -184,6 +196,10 @@ public class MoyenTransportFormController implements Initializable {
         }finally{
             alert.showAndWait();
         }
+            
+        }
+        
+ 
        
         
     }
@@ -197,8 +213,21 @@ public class MoyenTransportFormController implements Initializable {
         String matricule = tfmatricule.getText();
         String marque = tfmarque.getText();
         int nbr_place = parseInt(tfnbrplaces.getText());
+        Double frais = parseDouble(tffrais.getText());
         int id_transport = Integer.parseInt(tfId.getText());
-        String sql = "update moyen_transport set "
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        
+        
+        if(type.isEmpty() || matricule.isEmpty() || marque.isEmpty()){
+        
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setTitle("Erreur..!");
+            alert.setHeaderText(null);
+            alert.setContentText("Vous devez remplir les champs..!");
+            alert.showAndWait();
+        }else{
+            String sql = "update moyen_transport set "
                 + "type = '"+type+"'"
                 + ",matricule = '"+matricule+"'"
                 + ",marque = '"+marque+"'"
@@ -208,6 +237,43 @@ public class MoyenTransportFormController implements Initializable {
         PreparedStatement pst = cnx.prepareStatement(sql);
         pst.execute();
         
+        
+        
+        alert.setTitle("Succée");
+        alert.setHeaderText("Modifiée");
+        alert.setContentText("Moyen Transport bien Modifiée..");
+        
+        alert.showAndWait();
+        
+//        listMoyenT.clear();
+        afficher();
+        
+        combobox.setValue("");
+        tfmatricule.setText("");
+        tfmarque.setText("");
+        tfnbrplaces.setText("");
+        tffrais.setText("");
+        
+            
+        }
+        
+        
+    }
+
+    @FXML
+    private void supprimer(ActionEvent event) throws SQLException {
+        
+
+
+        String type = combobox.getValue();
+        String matricule = tfmatricule.getText();
+        String marque = tfmarque.getText();
+        int nbr_place = parseInt(tfnbrplaces.getText());
+        Double frais = parseDouble(tffrais.getText());
+        int id_transport = Integer.parseInt(tfId.getText());
+        
+        Moyen_Transport moyt = new Moyen_Transport(matricule);
+        MoyenTransportService moyTrSer = new MoyenTransportService();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         
         if(type.isEmpty() || matricule.isEmpty() || marque.isEmpty()){
@@ -217,34 +283,8 @@ public class MoyenTransportFormController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Vous devez remplir les champs..!");
             alert.showAndWait();
-        }
-        
-        alert.setTitle("Succée");
-        alert.setHeaderText("Modifiée");
-        alert.setContentText("Moyen Transport bien Modifiée..");
-        
-        alert.showAndWait();
-        
-        listMoyenT.clear();
-        afficher();
-        
-        combobox.setValue("");
-        tfmatricule.setText("");
-        tfmarque.setText("");
-        tfnbrplaces.setText("");
-    }
-
-    @FXML
-    private void supprimer(ActionEvent event) throws SQLException {
-        
-
-        String matricule = tfmatricule.getText();
-        
-        Moyen_Transport moyt = new Moyen_Transport(matricule);
-        MoyenTransportService moyTrSer = new MoyenTransportService();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        
-        try{
+        }else{
+             try{
             
         moyTrSer.supprimer(moyt);
         alert.setTitle("Succée");
@@ -255,6 +295,7 @@ public class MoyenTransportFormController implements Initializable {
         tfmatricule.setText("");
         tfmarque.setText("");
         tfnbrplaces.setText("");
+        tffrais.setText("");
         
         }catch (SQLException ex) {
             alert.setAlertType(Alert.AlertType.ERROR);
@@ -267,6 +308,12 @@ public class MoyenTransportFormController implements Initializable {
         
         listMoyenT.clear();
         afficher();
+            
+        }
+        
+        
+        
+       
     }
 
     @FXML
@@ -330,6 +377,7 @@ public class MoyenTransportFormController implements Initializable {
              tfmatricule.setText(tvmatricule.getCellData(index).toString());
              tfmarque.setText(tvmarque.getCellData(index).toString());
                tfnbrplaces.setText(tvnbrplaces.getCellData(index).toString());
+               tffrais.setText(tvfrais.getCellData(index).toString());
                tfId.setText(clId.getCellData(index).toString());
              
     

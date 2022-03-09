@@ -13,18 +13,13 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author Omar Amri
  */
-public class OffreCardFormController {
-
-
-    @FXML
-    private Label lbfrais;
+public class MoyenTransportCheckController implements Initializable {
     
     private myListener myListener;
 
@@ -37,22 +32,23 @@ public class OffreCardFormController {
     private Label lbmarque;
     @FXML
     private Label lbnbrplace;
-    
-    @FXML
-    private void click(MouseEvent mouseEvent) {
-        myListener.onClickListener(Moyen_Transport);
-    }
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
     
     public void setData(Moyen_Transport Moyen_Transport, myListener myListener) {
         this.Moyen_Transport = Moyen_Transport;
         this.myListener = myListener;
         lbtype.setText(Moyen_Transport.getType());
-        lbfrais.setText( String.valueOf(Moyen_Transport.getFrais())+ " "+"TND");
         lbmatricule.setText(Moyen_Transport.getMatricule());
         lbmarque.setText(Moyen_Transport.getMarque());
-        lbnbrplace.setText(String.valueOf(Moyen_Transport.getNbr_place()));
+        lbnbrplace.setText( String.valueOf(Moyen_Transport.getNbr_place()));
         
         
     }
-
 }

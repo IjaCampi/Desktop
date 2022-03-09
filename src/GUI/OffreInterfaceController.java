@@ -7,9 +7,11 @@ package GUI;
 
 import Services.MoyenTransportService;
 import Services.Offre_LocationService;
+import Services.User_service;
 import Test.myListener;
 import entites.Moyen_Transport;
 import entites.Offre_Location;
+import entites.Utilisateur;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -28,24 +30,35 @@ import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javafx.scene.layout.Region;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -56,17 +69,10 @@ public class OffreInterfaceController implements Initializable {
 
 
     @FXML
-    private Label lbetat;
-    @FXML
     private Label lbfrais;
-    @FXML
     private Label lbdatedebut;
-    @FXML
     private Label lbdatefin;
-    @FXML
     private Label lbnumtel;
-    @FXML
-    private Button btnReserver;
     @FXML
     private ScrollPane scroll;
     @FXML
@@ -75,20 +81,38 @@ public class OffreInterfaceController implements Initializable {
     private myListener myListener;
     @FXML
     private VBox chosenOffreCard;
+    
+    static int current_offer = 0;
+    @FXML
+    private BorderPane bp;
+    @FXML
+    private Button btnCheck;
+    @FXML
+    private Label lbtype;
+    @FXML
+    private Label lbmatricule;
+    @FXML
+    private Label lbmarque;
+    @FXML
+    private Label lbnbrplace;
+    
+    private Parent fxml;
+    @FXML
+    private AnchorPane app;
 
     /**
      * Initializes the controller class.
      */
     
-    private void setChosenOffres(Offre_Location e) {
+    private void setChosenOffres(Moyen_Transport e) {
         Random obj = new Random();
         int rand_num = obj.nextInt(0xffffff + 1);
         String colorCode = String.format("#%06x", rand_num);
-        lbetat.setText(e.getEtat());
+        lbtype.setText(e.getType());
         lbfrais.setText(String.valueOf(e.getFrais()) + " " + "TND");
-        lbdatedebut.setText(e.getDate_debut());
-        lbdatefin.setText(e.getDate_fin());
-        lbnumtel.setText(e.getNum_tel());
+        lbmatricule.setText(e.getMatricule());
+        lbmarque.setText(e.getMarque());
+        lbnbrplace.setText(String.valueOf(e.getNbr_place()));
         chosenOffreCard.setStyle("-fx-background-color:" + colorCode + ";\n"
                 + "    -fx-background-radius: 30;");
     
@@ -97,33 +121,37 @@ public class OffreInterfaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        Offre_LocationService Offre_LocationService = new Offre_LocationService();
-        if (Offre_LocationService.afficher().size() > 0) {
-            //  setChosenFruit(fruits.get(0));
-            setChosenOffres(Offre_LocationService.afficher().get(0));
-            myListener = new myListener() {
-                
-                @Override
-                public void onClickListener(Offre_Location Offre_Location) {
+        MoyenTransportService MoyenTransportService = new MoyenTransportService();
+        try {
+            if (MoyenTransportService.afficher().size() > 0) {
+                //  setChosenFruit(fruits.get(0));
+                setChosenOffres(MoyenTransportService.afficher().get(0));
+                myListener = new myListener() {
                     
-                    setChosenOffres(Offre_Location);
-                    
-                    
-                }
-            };
+                    @Override
+                    public void onClickListener(Moyen_Transport Moyen_Transport) {
+                        
+                        setChosenOffres(Moyen_Transport);
+                        current_offer = Moyen_Transport.getId_transport();
+                        
+                    }
+                };
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         int column = 0;
         int row = 1;
         try {
-            for (int i = 0; i < Offre_LocationService.afficher().size(); i++) {
+            for (int i = 0; i < MoyenTransportService.afficher().size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("OffreCardForm.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 OffreCardFormController OffreCardController = fxmlLoader.getController();
                 // itemController.setData(fruits.get(i),myListener);
-                OffreCardController.setData(Offre_LocationService.afficher().get(i), myListener);
+                OffreCardController.setData(MoyenTransportService.afficher().get(i), myListener);
                 if (column == 3) {
                     column = 0;
                     row++;
@@ -144,11 +172,47 @@ public class OffreInterfaceController implements Initializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(OffreInterfaceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
 
+    
+    
+    private void loadPage(String page) {
+        Parent root = null;
+        
+        try {
+            root = FXMLLoader.load(getClass().getResource(page+".fxml"));
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+        
+        bp.setCenter(root);
+    }
+
+    private void moyenTransportCheck(MouseEvent event) {
+        loadPage("moyenTransportCheck");
+    }
+
     @FXML
-    private void ajouterLigneCommande(ActionEvent event) {
+    private void reservationForm(MouseEvent event) {
+        Stage stage;
+        try {
+            stage = new Stage();
+            fxml = FXMLLoader.load(getClass().getResource("/GUI/reservationForm.fxml"));
+            stage.setScene(new Scene(fxml));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(btnCheck.getScene().getWindow());
+            stage.showAndWait();
+            
+        } catch (IOException e){
+           e.printStackTrace();
+        }
     }
     
-}
+    
+        
+    }
+    
+

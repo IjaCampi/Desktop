@@ -12,16 +12,17 @@ import java.sql.Date;
  * @author nmedia
  */
 public class Utilisateur {
-    private int id_user, num_tel,id_groupe;
+    private int id_user, num_tel;
     private String nom,prenom,adresse,login,mdp,role,date_naissance;
     public Utilisateur(){
     
     }
+    
+    
 
-    public Utilisateur(int id_user, int num_tel, int id_groupe, String nom, String prenom, String adresse, String login, String mdp, String role, String date_naissance) {
+    public Utilisateur(int id_user, int num_tel, String nom, String prenom, String adresse, String login, String mdp, String role, String date_naissance) {
         this.id_user = id_user;
         this.num_tel = num_tel;
-        this.id_groupe = id_groupe;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -49,10 +50,6 @@ public class Utilisateur {
 
     public int getNum_tel() {
         return num_tel;
-    }
-
-    public int getId_groupe() {
-        return id_groupe;
     }
 
     public String getNom() {
@@ -91,10 +88,6 @@ public class Utilisateur {
         this.num_tel = num_tel;
     }
 
-    public void setId_groupe(int id_groupe) {
-        this.id_groupe = id_groupe;
-    }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -125,7 +118,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" + "id_user=" + id_user + ", num_tel=" + num_tel + ", id_groupe=" + id_groupe + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", login=" + login + ", mdp=" + mdp + ", role=" + role + ", date_naissance=" + date_naissance + '}';
+        return "Utilisateur{" + "id_user=" + id_user + ", num_tel=" + num_tel + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", login=" + login + ", mdp=" + mdp + ", role=" + role + ", date_naissance=" + date_naissance + '}';
     }
 
     

@@ -26,7 +26,7 @@ public class FXMain extends Application {
     public void start(Stage primaryStage) {
             
         try {
-            URL fxURL = getClass().getResource("../GUI/HomeForm.fxml");
+            URL fxURL = getClass().getResource("../GUI/RservationList.fxml");
             Parent root;
             root = FXMLLoader.load(fxURL);
             Scene scene = new Scene(root);

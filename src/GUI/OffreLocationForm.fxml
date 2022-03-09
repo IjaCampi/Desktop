@@ -2,41 +2,19 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #666769;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.OffreLocationFormController">
    <children>
-      <AnchorPane layoutX="28.0" layoutY="120.0" prefHeight="552.0" prefWidth="945.0" style="-fx-background-color: #E9EEF7;">
+      <AnchorPane layoutX="215.0" layoutY="120.0" prefHeight="552.0" prefWidth="945.0" style="-fx-background-color: #E9EEF7;">
          <children>
-            <HBox layoutX="198.0" layoutY="56.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="56.0">
-               <children>
-                  <Label fx:id="lbnumtel" text="Numéro de Tél">
-                     <font>
-                        <Font name="Bell MT" size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="6.0" top="6.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="tfnumtel" prefHeight="25.0" prefWidth="185.0">
-                     <HBox.margin>
-                        <Insets left="128.0" top="6.0" />
-                     </HBox.margin>
-                  </TextField>
-                       
-               </children>
-            </HBox>
-            <HBox layoutX="198.0" layoutY="96.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="198.0">
+            <HBox layoutX="198.0" layoutY="136.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="198.0">
                <children>
                   <Label fx:id="lbdatedebut" text="Date Début">
                      <font>
@@ -53,7 +31,7 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox layoutX="198.0" layoutY="136.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="198.0">
+            <HBox layoutX="198.0" layoutY="176.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="198.0">
                <children>
                   <Label fx:id="lbdatefin" text="Date Fin">
                      <font>
@@ -70,84 +48,8 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox layoutX="198.0" layoutY="176.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.bottomAnchor="336.0" AnchorPane.leftAnchor="198.0">
-               <children>
-                  <Label fx:id="lbfrais" text="Frais">
-                     <font>
-                        <Font name="Bell MT" size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="6.0" top="6.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="tffrais" prefHeight="25.0" prefWidth="183.0">
-                     <HBox.margin>
-                        <Insets left="212.0" top="6.0" />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <Line endX="744.0" layoutX="118.0" layoutY="283.0" startX="-72.0" />
-            <TableView fx:id="tableviewoffres" layoutX="78.0" layoutY="301.0" onKeyTyped="#rechercher" onMouseClicked="#getSelected" prefHeight="220.0" prefWidth="753.0">
-              <columns>
-                <TableColumn fx:id="tvnumtel" prefWidth="176.0" text="Numéro de Tél" />
-                <TableColumn fx:id="tvdatedebut" prefWidth="158.0" text="Date Début" />
-                  <TableColumn fx:id="tvdatefin" prefWidth="162.0" text="Date Fin" />
-                  <TableColumn fx:id="tvfrais" prefWidth="122.0" text="Frais" />
-                  <TableColumn fx:id="tvetat" prefWidth="139.0" text="Etat" />
-                  <TableColumn fx:id="clId" prefWidth="157.0" text="ID" />
-              </columns>
-            </TableView>
-            <Button fx:id="btnajouteroffres" layoutX="778.0" layoutY="76.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8-add-64%20(1).png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button fx:id="btnmodifieroffres" layoutX="778.0" layoutY="116.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: transparent;" AnchorPane.topAnchor="116.0">
-               <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8-renew-50.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button fx:id="btnlisteoffres" layoutX="777.0" layoutY="196.0" mnemonicParsing="false" onAction="#afficher" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8-show-property-80.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button fx:id="btnsupprimeroffres" layoutX="789.0" layoutY="155.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/icons8-delete-document-50.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <HBox layoutX="198.0" layoutY="216.0" prefHeight="40.0" prefWidth="615.0">
-               <children>
-                  <Label fx:id="lbetat" text="Etat">
-                     <font>
-                        <Font name="Bell MT" size="20.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="6.0" top="6.0" />
-                     </HBox.margin>
-                  </Label>
-                  <ComboBox fx:id="combobox" prefHeight="25.0" prefWidth="183.0" promptText="...">
-                     <HBox.margin>
-                        <Insets left="220.0" top="10.0" />
-                     </HBox.margin>
-                  </ComboBox>
-               </children>
-            </HBox>
             <TextField fx:id="tfId" layoutX="38.0" layoutY="76.0" prefHeight="25.0" prefWidth="36.0" />
+            <Button fx:id="btnreserver" layoutX="454.0" layoutY="285.0" mnemonicParsing="false" onAction="#reserver" prefHeight="40.0" prefWidth="96.0" text="Réserver" />
          </children>
       </AnchorPane>
       <TextField fx:id="tfrechercher" alignment="CENTER" layoutX="429.0" layoutY="57.0" onKeyTyped="#rechercher" prefHeight="29.0" prefWidth="268.0" promptText="Rechercher" />

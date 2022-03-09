@@ -87,14 +87,15 @@
                   </TextField>
                </children>
             </HBox>
-            <Line endX="744.0" layoutX="118.0" layoutY="245.0" startX="-72.0" />
-            <TableView fx:id="tableviewmoyen" layoutX="78.0" layoutY="263.0" onKeyTyped="#rechercher" onMouseClicked="#getSelected" prefHeight="258.0" prefWidth="753.0">
+            <Line endX="744.0" layoutX="118.0" layoutY="277.0" startX="-72.0" />
+            <TableView fx:id="tableviewmoyen" layoutX="78.0" layoutY="291.0" onKeyTyped="#rechercher" onMouseClicked="#getSelected" prefHeight="244.0" prefWidth="753.0">
               <columns>
-                <TableColumn fx:id="tvtype" prefWidth="176.0" text="Type" />
-                <TableColumn fx:id="tvmatricule" prefWidth="216.0" text="Matricule" />
-                  <TableColumn fx:id="tvmarque" prefWidth="201.0" text="Marque" />
-                  <TableColumn fx:id="tvnbrplaces" prefWidth="159.0" text="Nombre de Places" />
-                  <TableColumn fx:id="clId" prefWidth="176.0" text="Type" />
+                <TableColumn fx:id="tvtype" prefWidth="147.0" text="Type" />
+                <TableColumn fx:id="tvmatricule" prefWidth="168.0" text="Matricule" />
+                  <TableColumn fx:id="tvmarque" prefWidth="159.0" text="Marque" />
+                  <TableColumn fx:id="tvnbrplaces" prefWidth="154.0" text="Nombre de Places" />
+                  <TableColumn fx:id="tvfrais" prefWidth="124.0" text="Frais" />
+                  <TableColumn fx:id="clId" minWidth="0.0" prefWidth="0.0" text="ID" />
               </columns>
             </TableView>
             <Button fx:id="btnajoutermoyentransport" layoutX="782.0" layoutY="47.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="72.0" style="-fx-background-color: transparent;">
@@ -131,6 +132,23 @@
                   </ImageView>
                </graphic>
             </Button>
+            <HBox layoutX="198.0" layoutY="216.0" prefHeight="40.0" prefWidth="555.0">
+               <children>
+                  <Label fx:id="lbnbrplaces1" text="Frais">
+                     <font>
+                        <Font name="Bell MT" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="6.0" top="6.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tffrais" prefHeight="25.0" prefWidth="183.0">
+                     <HBox.margin>
+                        <Insets left="200.0" top="6.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
       <TextField fx:id="tfrechercher" alignment="CENTER" layoutX="429.0" layoutY="57.0" onKeyTyped="#rechercher" prefHeight="29.0" prefWidth="268.0" promptText="Rechercher" />
