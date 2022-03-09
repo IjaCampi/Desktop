@@ -8,6 +8,7 @@ package ijacampi.GUI;
 import ijacampi.Entities.Commande;
 import ijacampi.Entities.Equipement;
 import ijacampi.Entities.LigneCommande;
+import ijacampi.Services.CommandeService;
 import ijacampi.Services.LigneCommandeService;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -52,18 +53,27 @@ public class ListCommandeController {
     private LigneCommandeService lcs;
     @FXML
     private Button show;
+    @FXML
+    private TextField idcommande;
+    @FXML
+    private Button btnajouter;
+    private CommandeService cs;
 
     /**
      * Initializes the controller class.
      */
-        public void SetData(Commande commande)
+        public void SetId(String message)
         {
-         
-             
-            this.commande=commande;
-                
+        this.idcommande.setText(message);
             
-
+        
+        }
+        
+        
+        public void SetCommande(Commande commande){
+            this.commande=commande;
+          //  System.out.println(commande.getId());
+            
         }
     public void initialize(URL url, ResourceBundle rb) {
      
@@ -81,6 +91,29 @@ public class ListCommandeController {
            tvLc.setItems(listCommande);
 */    
 }
+
+    @FXML
+    private void ajouterCommande(ActionEvent event) {
+       String adresse= labeladresse.getText();
+        System.out.println(adresse);
+        this.commande.setAdresse(adresse);
+        System.out.println(lcs.getbyCid(commande.getId()));
+       // this.commande.setPanier(lcs.getbyCommandeid(this.commande.getId()));
+       // System.out.println(commande.getPanier().get(0).affiche());
+        /* this.commande.setMontant(this.commande.total());
+              System.out.println("this"+commande.toString());
+
+      try{
+          cs.modifier(commande);
+     
+      }
+     catch(Exception e)
+     {
+         System.out.println("err"+e.getMessage());
+     }
+        */
+    }
+    
     
     
 }
