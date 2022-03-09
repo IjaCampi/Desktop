@@ -5,7 +5,7 @@
  */
 package ijacampi.GUI;
 
-import ijacampi.Entities.Camper;
+import ijacampi.Entities.Utilisateur;
 import ijacampi.Entities.Commande;
 import ijacampi.Entities.Equipement;
 import ijacampi.Entities.LigneCommande;
@@ -25,19 +25,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javafx.scene.layout.Region;
-
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -49,6 +53,8 @@ import javafx.scene.layout.VBox;
 public class StoreInterfaceController implements Initializable {
    private EquipementService es;
    private LigneCommandeService lcs;
+   private Utilisateur camper=new Utilisateur();
+   private LigneCommande LigneCommande;
     private static int current_id=0;
     private CommandeService cs;
     private static List panier=new ArrayList();
@@ -75,6 +81,8 @@ public class StoreInterfaceController implements Initializable {
     private Button BtnCommander;
     @FXML
     private TextField quantiteTextField;
+    @FXML
+    private BorderPane bp;
 
     /**
      * Initializes the controller class.
@@ -90,7 +98,32 @@ public class StoreInterfaceController implements Initializable {
                 + "    -fx-background-radius: 30;");
     
     }
-    
+    private void loadPage(String page, Commande c) {
+        /* FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("EquipementFxml.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                EquipementFxmlController equipemementController = fxmlLoader.getController();
+                // itemController.setData(fruits.get(i),myListener);
+                equipemementController.setData(equipements.getall().get(i), myListener);*/
+        Parent root = null;
+  FXMLLoader fxmlLoader = new FXMLLoader();
+  ListCommandeController ListCommandeController =fxmlLoader.getController();
+  
+  fxmlLoader.setLocation(getClass().getResource(page+".fxml"));
+  
+        try {
+            //ListCommandeController.SetData(c);
+           // 
+             ListCommandeController.SetData(c); 
+            root = FXMLLoader.load(getClass().getResource(page+".fxml"));
+               
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
+       
+        bp.setCenter(root);
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -149,16 +182,30 @@ public class StoreInterfaceController implements Initializable {
         CommandeService cs =new CommandeService();
         LigneCommandeService lcs=new LigneCommandeService();
         Equipement e=es.getall().get(current_id);
-        Camper camper=new Camper();
         camper.setId(1);
-       
+      //  System.out.println(camper.getId());
+      
        Date systemDate = Date.valueOf(java.time.LocalDate.now());
-        Commande c=new Commande(camper,systemDate,"",0f,"");
-      int id_commande = cs.add(c);
-      c.setId(id_commande);
+        Commande c=new Commande(camper,systemDate,"none",0f,"none");
+        int id_commande = cs.add(c);
+        c.setId(id_commande);
        LigneCommande lc=new LigneCommande(Integer.parseInt(quantiteTextField.getText()),e,c);
         System.out.println(lc.toString());
-        lcs.Ajouter(lc);      
+       lcs.Ajouter(lc);    
+       this.commande=c;
+       this.LigneCommande=lc;
+    }
+
+    @FXML
+    private void ListCommande(MouseEvent event) {
+        
+    //EquipementFxmlController equipemementController = fxmlLoader.getController();                 
+    //ListCommandeController.SetData(commande);
+        System.out.println(commande.toString());
+        loadPage("ListCommande",this.commande);
+    //ListCommandeController ListCommandeController =fxmlLoader.getController();
+    //ListCommandeController.SetData(this.commande);
+    
     }
 
 }

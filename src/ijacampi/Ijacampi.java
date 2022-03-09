@@ -7,19 +7,15 @@ package ijacampi;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import ijacampi.Entities.Camper;
+import ijacampi.Entities.Utilisateur;
 import ijacampi.Entities.Commande;
 import ijacampi.Entities.Equipement;
 import ijacampi.Entities.Evenement;
 import ijacampi.Entities.LigneCommande;
-import ijacampi.Entities.LignePanier;
-import ijacampi.Entities.Panier;
-import ijacampi.Entities.Produit;
+
 import ijacampi.Services.CommandeService;
 import ijacampi.Services.EquipementService;
 import ijacampi.Services.LigneCommandeService;
-import ijacampi.Services.LignePanierService;
-import ijacampi.Services.ProduitService;
 import ijacampi.utils.DBConnexion;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -72,7 +68,7 @@ public class Ijacampi {
         panier.afficherLigne();
          */
         Evenement ev = new Evenement(1, "weekend");
-        Camper camper = new Camper(1, "omar", "client");
+        Utilisateur camper = new Utilisateur(1, "omar", "client");
         Equipement e = new Equipement(ev, camper, "1", "2", "3", "4", "5");
         //public Equipement(Evenement evenement, Camper camper, float prix, String nom, String marque, String description, String photo, String categorie)
         Equipement e1 = new Equipement(camper, 10f, "lambda", "delta", "lambda_delta", "src", "alpha");

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Commande {
     private int id;
-    private Camper camper;  
+    private Utilisateur camper;  
     Date date_commande;
     String reference;
     float montant;
@@ -26,7 +26,7 @@ public class Commande {
  public Commande() {
     }
 
-    public Commande(Camper camper, ArrayList<LigneCommande> panier) {
+    public Commande(Utilisateur camper, ArrayList<LigneCommande> panier) {
         this.camper=camper;
         this.panier=panier;
     }
@@ -40,7 +40,7 @@ public class Commande {
         return total;
     }
 
-    public Commande(Camper camper, Date date_commande, String reference, float montant, String adresse, ArrayList<LigneCommande> panier) {
+    public Commande(Utilisateur camper, Date date_commande, String reference, float montant, String adresse, ArrayList<LigneCommande> panier) {
         this.camper = camper;
         this.date_commande = date_commande;
         this.reference = reference;
@@ -49,7 +49,7 @@ public class Commande {
         this.panier = panier;
     }
  
-    public Commande(Camper camper, Date date_commande, String reference,String adresse, ArrayList<LigneCommande> panier) {
+    public Commande(Utilisateur camper, Date date_commande, String reference,String adresse, ArrayList<LigneCommande> panier) {
         this.camper = camper;
         this.date_commande = date_commande;
         this.reference = reference;
@@ -72,7 +72,7 @@ public class Commande {
         this.adresse = adresse;
     }
 
-    public Commande(Camper camper, Date date_commande, String reference, float montant, String adresse) {
+    public Commande(Utilisateur camper, Date date_commande, String reference, float montant, String adresse) {
         this.camper = camper;
         this.date_commande = date_commande;
         this.reference = reference;
@@ -93,11 +93,11 @@ public class Commande {
         this.id = id;
     }
 
-    public Camper getCamper() {
+    public Utilisateur getCamper() {
         return camper;
     }
 
-    public void setCamper(Camper camper) {
+    public void setCamper(Utilisateur camper) {
         this.camper = camper;
     }
 

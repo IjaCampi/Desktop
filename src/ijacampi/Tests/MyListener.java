@@ -15,3 +15,4 @@ import ijacampi.Entities.Equipement;
 public interface MyListener {
     public void onClickListener(Equipement equipement);
 }
+

@@ -200,9 +200,10 @@ ObservableList<Equipement> listEquipement = FXCollections.observableArrayList();
         if(nom.equals(" ")||desc.equals(" ")||marque.equals(" ")){
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Erreur..!");
-            alert.setHeaderText(null);
+            alert.setHeaderText("error");
             alert.setContentText("Vous devez remplir les champs..!");
         }
+        else{
         
         es.Ajouter(e);
         alert.setTitle("Succée");
@@ -217,6 +218,7 @@ ObservableList<Equipement> listEquipement = FXCollections.observableArrayList();
                .graphic(null).position(Pos.TOP_LEFT)
                .hideAfter(Duration.seconds(5));
                 b.showInformation();
+        }
     }
     @FXML
     private void modifier(ActionEvent event) {
@@ -253,6 +255,7 @@ ObservableList<Equipement> listEquipement = FXCollections.observableArrayList();
            tvid.setCellValueFactory(new PropertyValueFactory<Equipement,Integer>("id")); 
          listEquipement.addAll(es.getall());
             
+         
        
             
         

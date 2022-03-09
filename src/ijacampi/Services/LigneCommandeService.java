@@ -5,6 +5,8 @@
  */
 package ijacampi.Services;
 
+import ijacampi.Entities.Commande;
+import ijacampi.Entities.Equipement;
 import ijacampi.Entities.LigneCommande;
 import ijacampi.Interface.Iservice;
 import ijacampi.utils.DBConnexion;
@@ -20,10 +22,36 @@ import java.util.ArrayList;
  */
 public class LigneCommandeService implements Iservice <LigneCommande> {
     Connection con = DBConnexion.getInstance().getCnx();
+    private CommandeService cs=new CommandeService();
+    private EquipementService es=new EquipementService();
     @Override
     public ArrayList<LigneCommande> afficher() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  ArrayList<LigneCommande> res = new ArrayList<LigneCommande>();
+         
+         try {
+            Statement stmt = con.createStatement();
+            String sql = "SELECT * FROM LigneCommande";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int equipement_id = rs.getInt("equipement_id");
+                int commande_id = rs.getInt("commande_id");
+                int  quantite= rs.getInt("quantite");
+                Equipement e=es.getall().get(equipement_id);
+                Commande c=cs.afficher().get(commande_id);
+                 LigneCommande E=new LigneCommande(id,e,c,quantite);
+                                res.add(E);
+                
+             //   Equipement E = new Equipement(id,nom,categorie,prix,marque,description,photo,client_id,evenement_id);
+              //  res.add(E);
+            }
+            rs.close();
+
+        }
+        catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return res;      }
 
     @Override
     public void Ajouter(LigneCommande e) {
@@ -73,5 +101,26 @@ String query="insert into ligne_commande (quantite,equipement_id,commande_id) va
             System.err.println(ex.getMessage());
         }         
     }
-    
+     public ArrayList<LigneCommande> getbyCommandeid(int id_commande) {
+           ArrayList<LigneCommande> list = new ArrayList<LigneCommande>();
+           LigneCommande e=new LigneCommande();
+  try {
+            PreparedStatement preparedStmt = con.prepareStatement("SELECT * FROM LigneCommande  where commande_id=?");
+            preparedStmt.setInt(1,id_commande);
+            preparedStmt.execute();
+             ResultSet res=preparedStmt.getGeneratedKeys();
+            while(res.next())
+            {
+               e.setId(res.getInt(1));
+               e.setEquipement(es.getall().get(res.getInt(2)));
+               e.setCommande(cs.afficher().get(res.getInt(3)));
+               e.setQuantite(res.getInt(4));
+               list.add(e);
+            }
+            
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }       
+        return list;
+     }
 }

@@ -24,7 +24,7 @@
         <URL value="@storeinterface.css" />
     </stylesheets>
     <children>
-      <BorderPane layoutX="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="bp" layoutX="6.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="200.0" prefWidth="435.0" styleClass="right-bar" stylesheets="@storeinterface.css" BorderPane.alignment="CENTER">
                <children>
@@ -133,7 +133,7 @@
                               <HBox alignment="CENTER" prefHeight="53.0" prefWidth="335.0" />
                            </children>
                         </HBox>
-                        <Button fx:id="BtnCommander" mnemonicParsing="false" onAction="#ajouterLigneCommande" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@storeinterface.css" text="Commander" textFill="#828282">
+                        <Button fx:id="BtnCommander" mnemonicParsing="false" onAction="#ajouterLigneCommande" onMouseClicked="#ListCommande" prefHeight="50.0" prefWidth="270.0" styleClass="add-btn" stylesheets="@storeinterface.css" text="Commander" textFill="#828282">
                            <VBox.margin>
                               <Insets bottom="20.0" top="30.0" />
                            </VBox.margin>

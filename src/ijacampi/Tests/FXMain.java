@@ -23,7 +23,7 @@ public class FXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Storeinterface.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/StoreInterface.fxml"));
         primaryStage.setTitle("Ija campi");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

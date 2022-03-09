@@ -13,11 +13,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #666769;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijacampi.GUI.CommandeFormController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="718.0" style="-fx-background-color: #666769;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijacampi.GUI.CommandeFormController">
    <children>
-      <AnchorPane layoutX="-11.0" layoutY="71.0" prefHeight="552.0" prefWidth="877.0" style="-fx-background-color: #E9EEF7;">
+      <AnchorPane layoutX="-11.0" layoutY="71.0" prefHeight="651.0" prefWidth="718.0" style="-fx-background-color: #E9EEF7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox layoutX="179.0" layoutY="36.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="179.0" AnchorPane.topAnchor="36.0">
+            <HBox layoutX="37.0" layoutY="87.0" prefHeight="40.0" prefWidth="481.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="87.0">
                <children>
                   <Label fx:id="lbtype" text="Montant">
                      <font>
@@ -35,7 +35,7 @@
                        
                </children>
             </HBox>
-            <HBox layoutX="179.0" layoutY="76.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="179.0">
+            <HBox layoutX="37.0" layoutY="132.0" prefHeight="40.0" prefWidth="508.0" AnchorPane.leftAnchor="37.0">
                <children>
                   <Label fx:id="lbmatricule" text="date">
                      <font>
@@ -52,7 +52,7 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox layoutX="179.0" layoutY="116.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.leftAnchor="179.0">
+            <HBox layoutX="37.0" layoutY="172.0" prefHeight="40.0" prefWidth="522.0" AnchorPane.leftAnchor="37.0">
                <children>
                   <Label fx:id="lbmarque" text="adresse">
                      <font>
@@ -69,7 +69,7 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox layoutX="179.0" layoutY="156.0" prefHeight="40.0" prefWidth="615.0" AnchorPane.bottomAnchor="356.0" AnchorPane.leftAnchor="179.0">
+            <HBox layoutX="37.0" layoutY="255.0" prefHeight="40.0" prefWidth="481.0" AnchorPane.bottomAnchor="356.0" AnchorPane.leftAnchor="37.0">
                <children>
                   <Label fx:id="lbnbrplaces" text="reference">
                      <font>
@@ -86,21 +86,19 @@
                   </TextField>
                </children>
             </HBox>
-            <Line endX="744.0" layoutX="118.0" layoutY="245.0" startX="-72.0" />
-            <TableView fx:id="tableviewmoyen" layoutX="78.0" layoutY="263.0" onKeyTyped="#rechercher" onMouseClicked="#getSelected" prefHeight="258.0" prefWidth="753.0">
+            <Line endX="567.0" layoutX="84.0" layoutY="318.0" startX="-72.0" />
+            <TableView fx:id="tableviewmoyen" layoutX="11.0" layoutY="334.0" onKeyTyped="#rechercher" onMouseClicked="#getSelected" prefHeight="245.0" prefWidth="696.0">
               <columns>
                 <TableColumn fx:id="tvreference" prefWidth="107.0" text="reference" />
                 <TableColumn fx:id="tvdate" prefWidth="128.0" text="date" />
-                  <TableColumn fx:id="tvadresse" prefWidth="340.0" text="adresse" />
-                  <TableColumn fx:id="tvmontant" prefWidth="79.0" text="montant" />
-                  <TableColumn fx:id="tvid" prefWidth="98.0" text="id client" />
+                  <TableColumn fx:id="tvadresse" prefWidth="147.0" text="adresse" />
+                  <TableColumn fx:id="tvmontant" prefWidth="149.0" text="montant" />
+                  <TableColumn fx:id="tvid" minWidth="0.0" prefWidth="201.0" text="id client" />
               </columns>
             </TableView>
-            <Button fx:id="btnajouterCommande" layoutX="778.0" layoutY="56.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="72.0" text="Ajouter" />
-            <Button fx:id="btnmodifierCommande" layoutX="778.0" layoutY="96.0" mnemonicParsing="false" onAction="#modifier" prefHeight="25.0" prefWidth="72.0" text="Modifier" AnchorPane.topAnchor="96.0" />
-            <Button fx:id="btnliste" layoutX="777.0" layoutY="176.0" mnemonicParsing="false" onAction="#afficher" prefHeight="25.0" prefWidth="72.0" text="Liste" />
-            <Button fx:id="btnsupprimerEquipement" layoutX="778.0" layoutY="136.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-            <HBox layoutX="179.0" layoutY="196.0" prefHeight="40.0" prefWidth="615.0">
+            <Button fx:id="btnajouterCommande" layoutX="594.0" layoutY="56.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="31.0" prefWidth="94.0" text="Ajouter" />
+            <Button fx:id="btnliste" layoutX="607.0" layoutY="200.0" mnemonicParsing="false" onAction="#afficher" prefHeight="25.0" prefWidth="72.0" text="Liste" />
+            <HBox layoutX="37.0" layoutY="215.0" prefHeight="40.0" prefWidth="481.0">
                <children>
                   <Label fx:id="lbnbrplaces1" text="id client">
                      <font>
@@ -117,17 +115,19 @@
                   </TextField>
                </children>
             </HBox>
+            <TextField fx:id="tfrechercher" alignment="CENTER" layoutX="63.0" layoutY="26.0" onKeyTyped="#rechercher" prefHeight="29.0" prefWidth="268.0" promptText="Rechercher" />
+            <Button fx:id="btrechercher" layoutX="377.0" layoutY="19.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" styleClass="transparent" stylesheets="@css/style.css">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8-search-60.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnmodifierCommande" layoutX="596.0" layoutY="102.0" mnemonicParsing="false" onAction="#modifier" prefHeight="31.0" prefWidth="94.0" text="Modifier" AnchorPane.topAnchor="102.0" />
+            <Button fx:id="btnsupprimerEquipement" layoutX="594.0" layoutY="152.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="31.0" prefWidth="94.0" text="Supprimer" />
          </children>
       </AnchorPane>
-      <TextField fx:id="tfrechercher" alignment="CENTER" layoutX="294.0" layoutY="56.0" onKeyTyped="#rechercher" prefHeight="29.0" prefWidth="268.0" promptText="Rechercher" />
-      <Button fx:id="btrechercher" layoutX="571.0" layoutY="51.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" styleClass="transparent" stylesheets="@css/style.css">
-         <graphic>
-            <ImageView fitHeight="28.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@icons/icons8-search-60.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
    </children>
 </AnchorPane>

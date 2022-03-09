@@ -73,17 +73,17 @@ public class CommandeFormController {
     @FXML
     private TextField tfreference;
     @FXML
-    private TableView<?> tableviewmoyen;
+    private TableView<Commande> tableviewmoyen;
     @FXML
-    private TableColumn<?, ?> tvreference;
+    private TableColumn<Commande, String> tvreference;
     @FXML
-    private TableColumn<?, ?> tvdate;
+    private TableColumn<Commande, Date> tvdate;
     @FXML
-    private TableColumn<?, ?> tvadresse;
+    private TableColumn<Commande, String> tvadresse;
     @FXML
-    private TableColumn<?, ?> tvmontant;
+    private TableColumn<Commande, Float> tvmontant;
     @FXML
-    private TableColumn<?, ?> tvid;
+    private TableColumn<Commande, Integer> tvid;
     @FXML
     private Button btnajouterCommande;
     @FXML
@@ -100,6 +100,8 @@ public class CommandeFormController {
     private TextField tfrechercher;
     @FXML
     private Button btrechercher;
+    ObservableList<Commande> listCommande = FXCollections.observableArrayList();
+    CommandeService cs=new CommandeService();
 
     @FXML
     private void getSelected(MouseEvent event) {
@@ -127,23 +129,22 @@ public class CommandeFormController {
             alert.setTitle("Erreur..!");
             alert.setHeaderText(null);
             alert.setContentText("Vous devez remplir les champs..!");
+        } else {
+            try {
+                cs.Ajouter(c);
+                alert.setTitle("Succée");
+                alert.setHeaderText("Ajoutée");
+                alert.setContentText("Moyen Transport bien Ajoutée..");
+
+            } catch (Exception ex) {
+                alert.setAlertType(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur..!");
+                alert.setHeaderText("n'est pas Ajoutée");
+                alert.setContentText(ex.getMessage());
+            } finally {
+                alert.showAndWait();
+            }
         }
-
-        try {
-            cs.Ajouter(c);
-            alert.setTitle("Succée");
-            alert.setHeaderText("Ajoutée");
-            alert.setContentText("Moyen Transport bien Ajoutée..");
-
-        } catch (Exception ex) {
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur..!");
-            alert.setHeaderText("n'est pas Ajoutée");
-            alert.setContentText(ex.getMessage());
-        } finally {
-            alert.showAndWait();
-        }
-
     }
 
     @FXML
@@ -152,6 +153,12 @@ public class CommandeFormController {
 
     @FXML
     private void afficher(ActionEvent event) {
+        tvreference.setCellValueFactory(new PropertyValueFactory<Commande,String>("reference"));
+        tvdate.setCellValueFactory(new PropertyValueFactory <Commande,Date>("date"));
+        tvadresse.setCellValueFactory(new PropertyValueFactory<Commande,String>("adresse"));
+        tvmontant.setCellValueFactory(new PropertyValueFactory<Commande,Float>("montant"));
+                 tvid.setCellValueFactory(new PropertyValueFactory<Commande,Integer>("id client"));
+
     }
 
     @FXML

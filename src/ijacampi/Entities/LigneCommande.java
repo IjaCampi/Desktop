@@ -17,7 +17,7 @@ public class LigneCommande {
     public LigneCommande() {
     }
 
-    public LigneCommande(int id, int quantite, Equipement equipement, Commande commande) {
+    public LigneCommande(int id, Equipement equipement, Commande commande,int quantite) {
         this.id = id;
         this.quantite = quantite;
         this.equipement = equipement;

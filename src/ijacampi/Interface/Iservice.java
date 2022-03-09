@@ -5,6 +5,7 @@
  */
 package ijacampi.Interface;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -12,10 +13,10 @@ import java.util.ArrayList;
  * @author brahim
  */
 public interface Iservice <T> {
-    public ArrayList<T> afficher();
-    public void Ajouter(T t);
-    public void modifier(T t);
-    public void supprimer(T t);
+    public ArrayList<T> afficher() throws SQLException;
+    public void Ajouter(T t) throws SQLException;
+    public void modifier(T t) throws SQLException;
+    public void supprimer(T t) throws SQLException;
     
 
 }

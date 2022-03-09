@@ -12,7 +12,7 @@ package ijacampi.Entities;
 public class Equipement {
      
    private Evenement evenement;
-   private Camper camper; 
+   private Utilisateur camper; 
    private int id;
    private float prix;
    private String nom,marque,description,photo,categorie;
@@ -24,7 +24,7 @@ public class Equipement {
        return "{id:"+ this.id+" nom"+this.nom+" cat"+this.categorie+" mar"+this.marque+" prx"+this.prix+" desc"+this.description+" ph"+this.photo;
    }
            
-    public Equipement(Evenement evenement, Camper camper, int id, float prix, String nom, String marque, String description, String photo, String categorie) {
+    public Equipement(Evenement evenement, Utilisateur camper, int id, float prix, String nom, String marque, String description, String photo, String categorie) {
         this.evenement = evenement;
         this.camper = camper;
         this.id = id;
@@ -35,7 +35,7 @@ public class Equipement {
         this.photo = photo;
         this.categorie = categorie;
     }
-    public Equipement(Evenement evenement, Camper camper, float prix, String nom, String marque, String description, String photo, String categorie) {
+    public Equipement(Evenement evenement, Utilisateur camper, float prix, String nom, String marque, String description, String photo, String categorie) {
         this.evenement = evenement;
         this.camper = camper;
         this.id = id;
@@ -47,7 +47,7 @@ public class Equipement {
         this.categorie = categorie;
     }
 
-    public Equipement(Evenement evenement, Camper camper, String nom, String marque, String description, String photo, String categorie) {
+    public Equipement(Evenement evenement, Utilisateur camper, String nom, String marque, String description, String photo, String categorie) {
         this.evenement = evenement;
         this.camper = camper;
         this.nom = nom;
@@ -56,7 +56,7 @@ public class Equipement {
         this.photo = photo;
         this.categorie = categorie;
     }
-    public Equipement(Camper camper,float prix, String nom, String marque, String description, String photo, String categorie) {
+    public Equipement(Utilisateur camper,float prix, String nom, String marque, String description, String photo, String categorie) {
         this.camper = camper;
         this.nom = nom;
         this.marque = marque;
@@ -94,11 +94,11 @@ public class Equipement {
         this.evenement = evenement;
     }
 
-    public Camper getCamper() {
+    public Utilisateur getCamper() {
         return camper;
     }
 
-    public void setCamper(Camper camper) {
+    public void setCamper(Utilisateur camper) {
         this.camper = camper;
     }
 

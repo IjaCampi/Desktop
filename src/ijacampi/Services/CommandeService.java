@@ -6,7 +6,7 @@
 package ijacampi.Services;
 
 import ijacampi.Entities.Commande;
-import ijacampi.Entities.Produit;
+import ijacampi.Entities.Utilisateur;
 import ijacampi.Interface.Iservice;
 import ijacampi.utils.DBConnexion;
 import java.sql.Connection;
@@ -37,8 +37,11 @@ Connection con = DBConnexion.getInstance().getCnx();
                 String reference= rs.getString("reference");
                 int utilisateur_id=rs.getInt("utilisateur_id");
                // Produit E = new Produit(id,qteStock,nom,marque,description,photo,categorie,prix_ut);
-               
-               Commande c=new Commande(id,date,reference,montant,adresse);
+               User_service us=new User_service();
+               Utilisateur u= us.afficher().get(id);
+              // Commande c=new Commande(u,);
+                //Commande c new Commande(id,date,)
+            Commande c=new Commande(id,date,reference,montant,adresse);
               
                 res.add(c);
             }
