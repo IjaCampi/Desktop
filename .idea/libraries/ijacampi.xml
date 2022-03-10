@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ijacampi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/ijacampi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
