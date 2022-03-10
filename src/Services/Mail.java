@@ -5,16 +5,20 @@
  */
 package Services;
 
-import javax.mail.internet.*;
-import java.util.Properties;
-import javax.mail.*;
+import javax.mail.internet.*; 
+import java.util.Properties;  
+import javax.mail.*;  
 
 /**
  *
- * @author Omar Amri
+ * @author USER
  */
 public class Mail {
-    public static void send(String from,String pwd,String to,String sub,String msg){
+
+
+
+  public static void send(String from,String pwd,String to,String sub,String msg){
+
     //Propriétés
     Properties p = new Properties();
     p.put("mail.smtp.host", "smtp.gmail.com");
@@ -43,3 +47,4 @@ public class Mail {
     }
   }
 }
+
