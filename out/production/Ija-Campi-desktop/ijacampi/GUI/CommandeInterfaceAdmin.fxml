@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijacampi.GUI.CommandeInterfaceAdminController">
+    <stylesheets>
+        <URL value="@commandeinterfaceadmin.css" />
+    </stylesheets>
+   <children>
+      <BorderPane layoutX="1.0" layoutY="1.0" prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <buttons>
+                  <Button mnemonicParsing="false" text="Supprimer" />
+                  <Button mnemonicParsing="false" text="Modifier" />
+                  <Button mnemonicParsing="false" text="Ajouter" />
+                  <Button mnemonicParsing="false" text="Afficher" />
+               </buttons>
+            </ButtonBar>
+         </top>
+         <center>
+            <TableView prefHeight="249.0" prefWidth="457.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Reference" />
+                <TableColumn prefWidth="150.39999389648438" text="Date" />
+                  <TableColumn minWidth="0.0" prefWidth="0.0" text="Montant" />
+                  <TableColumn prefWidth="75.0" text="Adresse" />
+                  <TableColumn prefWidth="175.20001220703125" text="Nom client" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
