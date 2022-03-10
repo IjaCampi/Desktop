@@ -22,7 +22,9 @@ import java.util.ArrayList;
  */
 public class CommandeService implements Iservice <Commande> {
 Connection con = DBConnexion.getInstance().getCnx();
-    @Override
+   
+
+@Override
     public ArrayList<Commande> afficher() {
       ArrayList<Commande> res = new ArrayList<Commande>();
         try {
@@ -38,11 +40,16 @@ Connection con = DBConnexion.getInstance().getCnx();
                 int utilisateur_id=rs.getInt("utilisateur_id");
                // Produit E = new Produit(id,qteStock,nom,marque,description,photo,categorie,prix_ut);
                User_service us=new User_service();
-               Utilisateur u= us.afficher().get(id);
-              // Commande c=new Commande(u,);
-                //Commande c new Commande(id,date,)
-            Commande c=new Commande(id,date,reference,montant,adresse);
-              
+               Utilisateur u= us.getAll().get(utilisateur_id);
+              /* public Commande(Utilisateur camper, Date date_commande, String reference, float montant, String adresse) {
+        this.camper = camper;
+        this.date_commande = date_commande;
+        this.reference = reference;
+        this.montant = montant;
+        this.adresse = adresse;
+    }
+*/
+              Commande c=new Commande(u,date,reference,montant,adresse);
                 res.add(c);
             }
             rs.close();

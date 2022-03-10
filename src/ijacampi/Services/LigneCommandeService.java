@@ -30,7 +30,7 @@ public class LigneCommandeService implements Iservice <LigneCommande> {
          
          try {
             Statement stmt = con.createStatement();
-            String sql = "SELECT * FROM LigneCommande";
+            String sql = "SELECT * FROM ligne_commande";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -101,17 +101,21 @@ String query="insert into ligne_commande (quantite,equipement_id,commande_id) va
             System.err.println(ex.getMessage());
         }         
     }
-     public ArrayList<LigneCommande> getbyCommandeid(int id_commande) {
+     
+    
+    
+    public ArrayList<LigneCommande> getbyCommandeid(int id_commande) {
            ArrayList<LigneCommande> list = new ArrayList<LigneCommande>();
            LigneCommande e=new LigneCommande();
   try {
-            PreparedStatement preparedStmt = con.prepareStatement("SELECT * FROM LigneCommande  where commande_id=?");
-            preparedStmt.setInt(1,id_commande);
+            PreparedStatement preparedStmt = con.prepareStatement("SELECT * FROM ligne_commande  where commande_id="+ id_commande );
+           // preparedStmt.setInt(1,id_commande);
             preparedStmt.execute();
              ResultSet res=preparedStmt.getGeneratedKeys();
             while(res.next())
             {
                e.setId(res.getInt(1));
+              
                e.setEquipement(es.getall().get(res.getInt(2)));
                e.setCommande(cs.afficher().get(res.getInt(3)));
                e.setQuantite(res.getInt(4));
@@ -123,4 +127,36 @@ String query="insert into ligne_commande (quantite,equipement_id,commande_id) va
         }       
         return list;
      }
+    
+    public ArrayList<LigneCommande> getbyCid(int idC)
+    {
+          ArrayList<LigneCommande> res = new ArrayList<LigneCommande>();
+
+           try {
+            Statement stmt = con.createStatement();
+            String sql = "SELECT * FROM ligne_commande where commande_id=" + idC ;
+               System.out.println(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int equipement_id = rs.getInt("equipement_id");
+                int commande_id = rs.getInt("commande_id");
+                int  quantite= rs.getInt("quantite");
+                Equipement e=es.getall().get(equipement_id);
+                Commande c=cs.afficher().get(commande_id);
+                LigneCommande E=new LigneCommande(id,e,c,quantite);
+                System.out.println(E);
+             
+                res.add(E);
+             //   Equipement E = new Equipement(id,nom,categorie,prix,marque,description,photo,client_id,evenement_id);
+              //  res.add(E);
+            }
+            rs.close();
+
+        }
+        catch (Exception e) {
+            System.err.println("error:"+e.getMessage());
+        }
+        return res;
+    }
 }

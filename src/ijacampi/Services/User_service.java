@@ -89,7 +89,7 @@ private Statement ste;
          public List<Utilisateur> getAll() throws SQLException{
         List<Utilisateur> users = new ArrayList<>();
         
-             String sql="select * from utilisateurs";
+             String sql="select * from utilisateur";
               PreparedStatement ste=mc.prepareStatement(sql);
             ste=mc.prepareStatement(sql);
             ResultSet rs=ste.executeQuery();

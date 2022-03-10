@@ -26,12 +26,13 @@
          <font>
             <Font name="System Bold" size="31.0" />
          </font></Label>
-      <Button layoutX="33.0" layoutY="513.0" mnemonicParsing="false" text="commander" />
+      <Button fx:id="btnajouter" layoutX="33.0" layoutY="513.0" mnemonicParsing="false" onAction="#ajouterCommande" text="commander" />
       <Label fx:id="reflabel" layoutX="230.0" layoutY="56.0" prefHeight="21.0" prefWidth="47.0" text="ref" />
       <Label layoutX="33.0" layoutY="383.0" text="Adresse de livraison" />
       <TextField fx:id="labeladresse" layoutX="33.0" layoutY="425.0" prefHeight="31.0" prefWidth="628.0" />
       <Label layoutX="609.0" layoutY="342.0" text="Total" />
       <Label fx:id="labelvtot" layoutX="694.0" layoutY="342.0" text="Label" />
       <Button fx:id="show" layoutX="647.0" layoutY="51.0" mnemonicParsing="false" onAction="#afficher" text="show" />
+      <TextField fx:id="idcommande" layoutX="67.0" layoutY="327.0" />
    </children>
 </AnchorPane>

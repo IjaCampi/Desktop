@@ -78,24 +78,22 @@ public class Ijacampi {
         Date t = Date.valueOf("2000-05-05");
         ArrayList<LigneCommande> panier = new ArrayList();
         Commande commande=new Commande(camper,panier);
-       
+               LigneCommandeService lcs =new LigneCommandeService();
+
         LigneCommande lc1 = new LigneCommande(2, e1,commande);
         LigneCommande lc2 = new LigneCommande(2, e2,commande);
         panier.add(lc2);
         panier.add(lc1);
-        commande.setPanier(panier);
-        
+        //commande.setPanier(panier);
+        CommandeService c=new CommandeService();
+        System.out.println(c.afficher());
+        // commande.setPanier(lcs.getbyCid(1));
+            System.out.println("panierx:"+commande.getPanier());
         commande.setMontant(commande.total());
-        System.out.println("x:"+commande.getMontant());
         commande.setId(1);
         e1.setId(3);
         e2.setId(4);
-        System.out.println("x:"+camper.getId()+"y:"+commande.getId());
-        LigneCommandeService lcs =new LigneCommandeService();
-       for(int i=0;i<panier.size();i++)
-       {
-       //  lcs.Ajouter(panier.get(i));
-       }
+      
         
 
     }

@@ -106,23 +106,24 @@ public class StoreInterfaceController implements Initializable {
                 EquipementFxmlController equipemementController = fxmlLoader.getController();
                 // itemController.setData(fruits.get(i),myListener);
                 equipemementController.setData(equipements.getall().get(i), myListener);*/
-        Parent root = null;
-  FXMLLoader fxmlLoader = new FXMLLoader();
-  ListCommandeController ListCommandeController =fxmlLoader.getController();
+        
   
-  fxmlLoader.setLocation(getClass().getResource(page+".fxml"));
   
         try {
             //ListCommandeController.SetData(c);
            // 
-             ListCommandeController.SetData(c); 
-            root = FXMLLoader.load(getClass().getResource(page+".fxml"));
-               
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(page+".fxml"));
+            
+            Parent root1 = loader.load();
+            ListCommandeController dhc = loader.getController();
+                dhc.SetId(""+c.getId());
+                dhc.SetCommande(c);
+                bp.setCenter(root1);
         } catch (IOException ex) {
             ex.getMessage();
         }
        
-        bp.setCenter(root);
+        
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
