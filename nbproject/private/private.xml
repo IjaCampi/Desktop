@@ -3,13 +3,46 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/Controller/AjouterReclamationController.java</file>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/Controller/ShowAvisController.java</file>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/pidev/Pidev.java</file>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/Controller/AdminReclamationController.java</file>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/Controller/AfficherMerReclamationController.java</file>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/entities/mail.java</file>
-            <file>file:/C:/Users/21627/OneDrive/Bureau/nerminepidev/Pidev%20(1)/Pidev/src/services/AvisService.java</file>
+
+
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Services/ReservationEvenementCRUD.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/ReserverController.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Services/Mail.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/ListeHebergementsWindow.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Entitys/Hebergement.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Entitys/ReservationSimple.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/ReserverWindow.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/DetailsHebergementController.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/HebergementController.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/ListeHebergementController.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Services/ReservationSimpleCRUD.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Entitys/ReservationEvenement.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/GUI/DetailsHebergementClientController.java</file>
+            <file>file:/C:/Users/USER/Desktop/Hebergement-main/src/Services/HebergementCRUD.java</file>
+
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Services/EquipementService.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Entities/Equipement.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/ListCommandeController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Services/CommandeService.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Services/Offre_LocationService.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/MoyenTransportFormController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/OffreCardFormController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Entities/Offre_Location.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/StoreInterfaceController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Tests/FXMain.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/utils/DBConnexion.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/EquipementFormController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Services/MoyenTransportService.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Tests/MyListenerTransport.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/ReservationFormController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Entities/Commande.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Ijacampi.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/MoyenTransportCheckController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/GUI/EquipementFxmlController.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Interface/Iservice.java</file>
+            <file>file:/D:/document/GitHub/Desktop/src/ijacampi/Tests/MyListener.java</file>
+
+
         </group>
     </open-files>
 </project-private>
