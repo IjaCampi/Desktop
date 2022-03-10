@@ -9,9 +9,11 @@ import com.edu.camping.models.Utilisateur;
 import com.edu.camping.services.User_service;
 import com.edu.camping.utils.DBconnection;
 import com.jfoenix.controls.JFXDatePicker;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,7 +25,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -36,6 +40,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -96,6 +102,12 @@ public class UtilisateurController implements Initializable {
    
     @FXML
     private TextField tfnum_tel;
+    @FXML
+    private BorderPane tfAnchor;
+    @FXML
+    private TextField tfid;
+    @FXML
+    private AnchorPane tfa;
         
     /**
      * Initializes the controller class.
@@ -182,40 +194,68 @@ public class UtilisateurController implements Initializable {
 
 
     @FXML
-    private void modifier(ActionEvent event) {
+    private void modifier(ActionEvent event) throws SQLException {
+        Connection cnx = DBconnection.getInstance().getCnx();
+       Utilisateur e=new Utilisateur();
+       
+      
          String nom = tfnom.getText();
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
+                String Date_naissance = tfadresse.getText();
+
         int Num_tel = Integer.parseInt(tfnum_tel.getText());
-        Utilisateur u1=tableviewuser.getSelectionModel().getSelectedItem();
 
          String login = tflogin.getText();
            String password = tfpass.getText();
         String role = btnrole.getText();
+        int id_user=Integer.parseInt(tfid.getText());
+         String sql = "update utilisateurs set "
+                + "nom = '"+nom+"'"
+                + ",prenom = '"+prenom+"'"
+                + ",adresse = '"+adresse+"'"
+                + ",num_tel = "+Num_tel+""
+                + ",date_naissance = "+Date_naissance+""
+                  + ",login = "+login+""
+                  + ",password = "+password+""
+                 +",role = "+role+""
 
-         Utilisateur u = new Utilisateur(nom,prenom,tfdate.getValue().format(DateTimeFormatter.ISO_DATE ),Num_tel,adresse,login, password,role, u1.getId_user()); 
-      
-         User_service us = new User_service();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                + " where ud_user = '" +id_user +"'";
         
-        try{
+        PreparedStatement pst = cnx.prepareStatement(sql);
+        pst.executeUpdate(sql);
+                Utilisateur u = new Utilisateur(id_user,Num_tel,nom,prenom,adresse,login,password,role,tfdate.getValue().format(DateTimeFormatter.ISO_DATE));
+
+         
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+         try{
+             
             
-        us.updateOne(u);
+        us.updateOne(e);
         alert.setTitle("Succée");
-        alert.setHeaderText("Modifiée");
-        alert.setContentText("utlisateur bien Modifiée..");
+        alert.setHeaderText("Ajoutée");
+        alert.setContentText("Utilisateur bien modifié..");
         
         }catch (SQLException ex) {
-            alert.setAlertType(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur..!");
-            alert.setHeaderText("n'est pas Modifiée");
-            alert.setContentText(ex.getMessage());
-        }finally{
-            alert.showAndWait();
         }
-        afficher();
+        
+            
+            listusers.clear();
+            afficher();
+      
+        
+        tfnom.setText("");
+                tfprenom.setText("");
+        tfadresse.setText("");
+                tflogin.setText("");
+                        tfpass.setText("");
+                        tfnum_tel.setText("");
+                        
+
+
+       
     }
-    
 
     @FXML
     private void supprimer(ActionEvent event) {
@@ -296,14 +336,22 @@ public class UtilisateurController implements Initializable {
 
         Utilisateur u = new Utilisateur(Num_tel,nom,prenom,adresse,login,password,role,tfdate.getValue().format(DateTimeFormatter.ISO_DATE));
                         User_service us = new User_service();
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        
-        if(tfnom.equals(" ")||tfprenom.equals(" ")||tfadresse.equals(" ")||tfnum_tel.equals(" ")||tflogin.equals(" ")||tfpass.equals(" ")||btnrole.equals(" ")){
+
+        if(nom.isEmpty()&&prenom.isEmpty()&&adresse.isEmpty()&&login.isEmpty()&&password.isEmpty()&&role.isEmpty()||tfnum_tel.getText().equals("")){
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Erreur..!");
             alert.setHeaderText(null);
-            alert.setContentText("Vous devez remplir les champs..!");
+            alert.setContentText("les champs sont vides!");
+            alert.showAndWait();
+        }
+        else
+        if(nom.isEmpty()||prenom.isEmpty()||adresse.isEmpty()||login.isEmpty()||password.isEmpty()||role.isEmpty()){
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setTitle("Erreur..!");
+            alert.setHeaderText(null);
+            alert.setContentText("Vous devez remplir tous les champs..!");
+            alert.showAndWait();
         }
         else{
         try{
@@ -327,8 +375,22 @@ public class UtilisateurController implements Initializable {
         }
         
     }
+
+    private void deconnecter(ActionEvent event) {
+          loadUi("NewLogin");
     }
+     private void loadUi(String ui) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource(ui+".fxml"));
+        } catch (IOException ex) {
+            
+        }
+        tfAnchor.setCenter(root);
     
+    }
+    }
+       
 
 
 

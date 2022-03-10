@@ -32,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import static sun.security.jgss.GSSUtil.login;
 
 /**
  * FXML Controller class
@@ -50,6 +51,8 @@ public class NewLoginController implements Initializable {
     private Button tfsignup;
     @FXML
     private BorderPane tfAnchor;
+    public int id;
+
 
     /**
      * Initializes the controller class.
@@ -82,26 +85,15 @@ Connection mc=DBconnection.getInstance().getCnx();
             alert.setContentText("You need to fill all the fields first!");
             alert.showAndWait();
           }
-        
-        else if(res==0){alert.setAlertType(Alert.AlertType.WARNING);
-            alert.setTitle("Conditions de saisie");
-            alert.setHeaderText(null);
-            alert.setContentText("You should sign up!");
-            alert.showAndWait();
-       
-       }
-       
-         if(res!=0){alert.setAlertType(Alert.AlertType.WARNING);}
-        if(role.contains("Admin") ){
+      
+       else if(role.contains("Admin") ){
            
          u.setRole("Admin");
           loadUi("DashbordAdmin");
-         }
-    
-        if(role.contains("Camper")){
+           if(role.contains("Camper")){
 
         u.setRole("Camper");
-          loadUi("Dashborduser");
+          loadUi("DashbordAdmin");
         
         } 
         
@@ -119,13 +111,43 @@ Connection mc=DBconnection.getInstance().getCnx();
         
          
          }
+         }
+        else if(res==0){alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setTitle("Conditions de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("You should sign up!!");
+            alert.showAndWait();
+       
+       }
+       
+        
+    
+       
     }
       
          private void loadUi(String ui) {
         
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource(ui+ ".fxml"));
+            //root = FXMLLoader.load(getClass().getResource(ui+ ".fxml"));
+            String login =tflogin.getText();
+             String pwd = tfpass.getText();
+            
+            User_service hc = new User_service();
+            Utilisateur h1 = new Utilisateur();
+            try {
+                h1 = hc.affiche(login,pwd);
+            } catch (SQLException ex) {
+            }
+           
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(ui+ ".fxml"));
+            
+            Parent root1 = loader.load();
+            DashbordAdminController dhc = loader.getController();
+           // dhc.setID(""+h1.getId_user());
+            
+            tflogin.getScene().setRoot(root1);
         } catch (IOException ex) {
             
         }
@@ -143,6 +165,7 @@ Connection mc=DBconnection.getInstance().getCnx();
         
         Parent root = null;
         try {
+            
             root = FXMLLoader.load(getClass().getResource("Inscription.fxml"));
         } catch (IOException ex) {
             

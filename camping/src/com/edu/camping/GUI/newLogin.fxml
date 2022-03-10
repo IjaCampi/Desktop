@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="373.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edu.camping.GUI.NewLoginController">
    <children>
-      <BorderPane fx:id="tfAnchor" layoutX="-7.0" layoutY="20.0" prefHeight="382.0" prefWidth="510.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+      <BorderPane fx:id="tfAnchor" layoutX="-7.0" layoutY="-2.0" prefHeight="373.0" prefWidth="517.0" style="-fx-background-color: #B0E0E6;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
          <center>
             <AnchorPane prefHeight="371.0" prefWidth="517.0" BorderPane.alignment="CENTER">
                <children>
@@ -41,7 +41,7 @@
                   <Button fx:id="tfsignup" layoutX="72.0" layoutY="272.0" mnemonicParsing="false" onAction="#signup" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: orange;" text="S'inscrire" />
                   <ImageView fitHeight="110.0" fitWidth="138.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Ija%20Campii%20LogoPNG.png" />
+                        <Image url="@../../../../Img/Ija%20Campii%20LogoPNG.png" />
                      </image>
                   </ImageView>
                   <PasswordField fx:id="tfpass" layoutX="226.0" layoutY="178.0" promptText="password" />

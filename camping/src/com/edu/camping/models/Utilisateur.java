@@ -34,6 +34,11 @@ public class Utilisateur {
         this.date_naissance = date_naissance;
     }
 
+    public Utilisateur(int id_user) {
+        this.id_user = id_user;
+    }
+    
+
     public Utilisateur(int num_tel, String nom, String prenom, String adresse, String login, String mdp, String role, String date_naissance) {
         this.num_tel = num_tel;
         this.nom = nom;

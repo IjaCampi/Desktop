@@ -8,6 +8,7 @@ package com.edu.camping.GUI;
 import com.edu.camping.models.Utilisateur;
 import com.edu.camping.services.User_service;
 import com.edu.camping.utils.DBconnection;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,10 +18,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import sun.security.util.Password;
 
 /**
  * FXML Controller class
@@ -29,34 +35,74 @@ import javafx.scene.control.TextField;
  */
 public class PasswordforgetController implements Initializable {
 
-    @FXML
-    private TextField tfnewpass;
+   
     @FXML
     private TextField tfcpass;
-    @FXML
-    private Button btnok;
  User_service us=new User_service();
 
         ObservableList<Utilisateur>listusers=FXCollections.observableArrayList();
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Button btretour;
+   
+    @FXML
+    private TextField tfnew;
+   
+    @FXML
+    private BorderPane tfAnchor;
+    @FXML
+    private TextField tflogin;
+    @FXML
+    private TextField tfid;
+    @FXML
+    private Button tfok;
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    
         // TODO
     }    
 
+    
+         
+   
     @FXML
-    private void ok(ActionEvent event) throws SQLException {
-         Connection cnx = DBconnection.getInstance().getCnx();
+    private void retour(ActionEvent event) {
+       
+          
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("newLogin.fxml"));
+        } catch (IOException ex) {
+            
+        }
+        tfAnchor.setCenter(root);
+    
         
-            String sql= "update utilisateurs set password = ? where login= ?";
-             PreparedStatement pst = cnx.prepareStatement(sql);
-          pst.execute();
+    }
+
+    @FXML
+    private void valider(ActionEvent event) throws SQLException {
+        Connection cnx = DBconnection.getInstance().getCnx();
+       
+        String newpassword = tfnew.getText();
+        String cpassword  = tfcpass.getText();
+         int id_user = Integer.parseInt(tfid.getText());
+        
+     String login = tflogin.getText();
+        
+        
+        String sql = "update utilisateurs set "
+                + ",password = '"+newpassword+"'"
+                
+                
+                + " where id_user = '" +id_user +"'";
+        
+        PreparedStatement pst = cnx.prepareStatement(sql);
+        pst.executeUpdate();
         
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         
-        if(tfnewpass.equals(" ")|| tfcpass.equals(" ") ){
+        if(tfnew.equals("") || tfcpass.equals("")) {
         
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Erreur..!");
@@ -64,17 +110,27 @@ public class PasswordforgetController implements Initializable {
             alert.setContentText("Vous devez remplir les champs..!");
             alert.showAndWait();
         }
-        tfnewpass.setText("");
-        tfcpass.setText("");
-        alert.setTitle("Succée");
+        
+       alert.setTitle("Succée");
         alert.setHeaderText("Modifiée");
-        alert.setContentText("password  bien Modifiée..");
+        alert.setContentText("Moyen Transport bien Modifiée..");
         
         alert.showAndWait();
         
        
         
+        tfnew.setText("");
+                tfcpass.setText("");
+                
        
-    }}
+                        
+
+    }
+
+}
+    
+    
+    
+
     
 

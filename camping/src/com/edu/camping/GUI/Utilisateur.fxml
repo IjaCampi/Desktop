@@ -15,18 +15,18 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="655.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edu.camping.GUI.UtilisateurController">
+<AnchorPane id="AnchorPane" fx:id="tfa" prefHeight="655.0" prefWidth="1107.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edu.camping.GUI.UtilisateurController">
     
 
    <children>
-      <BorderPane layoutX="5.0" layoutY="3.0" prefHeight="219.0" prefWidth="236.0">
+      <BorderPane fx:id="tfAnchor" layoutX="5.0" layoutY="3.0" prefHeight="219.0" prefWidth="236.0">
          <center>
             <TextField fx:id="tfrechercher" alignment="CENTER" onKeyTyped="#rechercher" prefHeight="37.0" prefWidth="191.0" promptText="Rechercher" BorderPane.alignment="CENTER" />
          </center>
          <top>
             <ImageView fitHeight="156.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@stock-vector-welcome-to-camping-poster.jpg" />
+                  <Image url="@../../../../Img/camping1_1.jpg" />
                </image>
             </ImageView>
          </top>
@@ -113,6 +113,7 @@
             </RadioButton>
             <JFXDatePicker fx:id="tfdate" layoutX="165.0" layoutY="212.0" />
             <TextField fx:id="tfnum_tel" layoutX="145.0" layoutY="172.0" />
+            <TextField fx:id="tfid" layoutX="493.0" layoutY="187.0" visible="false" />
          </children>
       </AnchorPane>
       <Button fx:id="btnajouteruser" layoutX="70.0" layoutY="233.0" mnemonicParsing="false" onAction="#ajouteruser" prefHeight="25.0" prefWidth="72.0" text="Ajouter" />
@@ -121,7 +122,7 @@
       <Button fx:id="btnliste" layoutX="70.0" layoutY="376.0" mnemonicParsing="false" onAction="#afficher" prefHeight="25.0" prefWidth="72.0" text="Liste" />
       <ImageView fitHeight="28.0" fitWidth="21.0" layoutX="241.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@icons8-search-60%20(2).png" />
+            <Image url="@../../../../Img/icons8-search-30.png" />
          </image>
       </ImageView>
    </children>

@@ -5,6 +5,7 @@
  */
 package com.edu.camping.GUI;
 
+import com.edu.camping.models.Mail;
 import com.edu.camping.models.Utilisateur;
 import com.edu.camping.services.User_service;
 import com.edu.camping.utils.DBconnection;
@@ -22,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -29,6 +31,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -57,9 +60,9 @@ public class InscriptionController implements Initializable {
     private RadioButton btnrole;
     @FXML
     private JFXDatePicker tfdate;
-      private BorderPane tfAnchor;
+     
     @FXML
-    private AnchorPane tfanc;
+    private BorderPane tfAnchor;
 
     /**
      * Initializes the controller class.
@@ -129,6 +132,15 @@ public class InscriptionController implements Initializable {
         }finally{
             alert.showAndWait();
         }
+        
+        Mail.send(
+		"houssemjebali@gmail.com",
+		"houssem1998",
+		"houssem.jbali@esprit.tn",
+		"Bienvenu sur IJA CAMPI",
+		"Creation Compte effectué!"
+	);
+        
         }
 }
 
@@ -136,16 +148,15 @@ public class InscriptionController implements Initializable {
     
 
     private void retour(ActionEvent event) {
-        loadUi("NewLogin");
+      try{
+            btretour.getScene().getWindow().hide();
+            Parent root =FXMLLoader.load(getClass().getResource("../GUI/newLogin.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene= new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+                
+        }catch(Exception e){
     }
-     private void loadUi(String ui) {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource(ui+".fxml"));
-        } catch (IOException ex) {
-            
-        }
-        tfAnchor.setCenter(root);
-    
-    }
+}
 }

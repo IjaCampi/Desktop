@@ -228,13 +228,77 @@ public ArrayList<Utilisateur> trierNom() throws SQLException {
         return id_user;
 
     }
+         
+    public List<Utilisateur> afficheruser(int id) throws SQLException{
+     
+     ste = mc.createStatement();
+                List<Utilisateur> list = new ArrayList<>();
 
+
+        try{
+
+            PreparedStatement pre = mc.prepareStatement("SELECT Id_user  from utilisateurs where Id_user=?");
+   
+            ResultSet rs = pre.executeQuery();
+
+            while (rs.next()) {
+                list.add(new Utilisateur(rs.getInt("id_user"),rs.getInt("num_tel"),rs.getString("nom"),rs.getString("prenom"),rs.getString("adresse"),rs.getString("login"),rs.getString("password"),rs.getString("role"),rs.getString("Date_naissance")));
+            } 
+    
+        } catch(SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+            return list;
+
+                
+ }
+    
     @Override
     public void deleteOne(Utilisateur u) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public   Utilisateur affiche(String Login,String password ) throws SQLException{
+            Utilisateur u = new Utilisateur(); 
+             String sql="select * from utilisateurs where login=? and mdp=?";
+              PreparedStatement ste=mc.prepareStatement(sql);
+              ste.setString(1, Login);
+              ste.setString(2,password);
+              ResultSet rs=ste.executeQuery();
+              while (rs.next()){
+                  u.setId_user(rs.getInt(1));
+                  
+              }
+    return u;
+            
+        
     
     
+    
+    }
+     public   Utilisateur afficherParId(int id ) throws SQLException{
+            Utilisateur u = new Utilisateur(); 
+             String sql="select * from utilisateurs where login=? and mdp=?";
+              PreparedStatement ste=mc.prepareStatement(sql);
+              ste.setInt(1, id);
+              ResultSet rs=ste.executeQuery();
+              while (rs.next()){
+                  u.setId_user(rs.getInt(1));
+                  u.setAdresse(rs.getString("adresse"));
+                                    u.setNom(rs.getString("nom"));
+                  u.setPrenom(rs.getString("prenom"));
+                                    u.setDate_naissance(rs.getString("date_naissance"));
+
+u.setNum_tel(rs.getInt("Num_tel"));
+  u.setLogin(rs.getString("login"));
+                  
+              }
+    return u;
+            
+        
+    
+    
+    
+    }
     }
 
 
