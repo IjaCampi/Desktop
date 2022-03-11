@@ -87,32 +87,57 @@ Connection mc=DBconnection.getInstance().getCnx();
           }
       
        else if(role.contains("Admin") ){
+             try{
+            Parent root =FXMLLoader.load(getClass().getResource("../GUI/DashbordAdmin.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene= new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+                
+        }catch(Exception e){
+    }}
+    
            
-         u.setRole("Admin");
-          loadUi("DashbordAdmin");
-           if(role.contains("Camper")){
-
-        u.setRole("Camper");
-          loadUi("DashbordAdmin");
-        
-        } 
-        
-         if(role.contains("Agent_transport")){
-
-        u.setRole("Agent_transport");
-          loadUi("Dashborduser");
-        
          
-         }
-          if(role.contains("Hebergeur")){
+          else if(role.contains("Camper")){
+               
+             try{
+            Parent root =FXMLLoader.load(getClass().getResource("../GUI/Dashbordcamper.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene= new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+                
+        }catch(Exception e){
+    }}
 
-        u.setRole("Hebergeur");
-          loadUi("Dashborduser");
         
+        else  if(role.contains("agent_transport")){
+             try{
+            Parent root =FXMLLoader.load(getClass().getResource("../GUI/Dashbordagent.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene= new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+                
+        }catch(Exception e){
+    }}
+
+        else if(role.contains("Hebergeur")){
+             try{
+            Parent root =FXMLLoader.load(getClass().getResource("../GUI/Dashbordhebergeur.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene= new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+                
+        }catch(Exception e){
+    }}
          
-         }
-         }
-        else if(res==0){alert.setAlertType(Alert.AlertType.WARNING);
+         
+          
+         
+                 else {alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Conditions de saisie");
             alert.setHeaderText(null);
             alert.setContentText("You should sign up!!");
@@ -123,7 +148,7 @@ Connection mc=DBconnection.getInstance().getCnx();
         
     
        
-    }
+           }
       
          private void loadUi(String ui) {
         

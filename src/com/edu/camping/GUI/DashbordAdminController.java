@@ -114,8 +114,12 @@ try{
 
    
     @FXML
-    private void profile(MouseEvent event) {
-       Stage stage;
+    
+       
+
+    
+    private void profile(ActionEvent event) {
+        Stage stage;
         try {
           
             stage = new Stage();
@@ -130,6 +134,8 @@ try{
         }
     }
     }
+    
+    
    
 
    

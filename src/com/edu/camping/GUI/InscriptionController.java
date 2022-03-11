@@ -72,25 +72,10 @@ public class InscriptionController implements Initializable {
         // TODO
     }    
 
-    private void tfsign(ActionEvent event) {
-         Alert alert=new Alert(Alert.AlertType.WARNING);
-        if(tflogin.getText().equals("")|| tfpass.getText().equals("")||tfnom.getText().equals(" ")||tfprenom.getText().equals(" ")||tfNum_tel.getText().equals(" ")||tfadresse.getText().equals(" ")){
-           
-         alert.setAlertType(Alert.AlertType.WARNING);
-            alert.setTitle("Conditions de saisie");
-            alert.setHeaderText(null);
-            alert.setContentText("You need to fill all the fields first!");
-            alert.showAndWait();
-          }
-        else{
-        alert.setAlertType(Alert.AlertType.INFORMATION);
+    
+    
         
-        alert.setContentText("sign up has succeded");
-         alert.showAndWait();
-
-        }
-        
-    }
+    
 
     @FXML
     private void enregistrer(ActionEvent event) {
@@ -110,11 +95,12 @@ public class InscriptionController implements Initializable {
                         User_service us = new User_service();
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);  
-          if(tfnom.equals(" ")||tfprenom.equals(" ")||tfadresse.equals(" ")||tfNum_tel.equals(" ")||tflogin.equals(" ")||tfpass.equals(" ")||btnrole.equals(" ")){
+          if(nom.isEmpty()||prenom.isEmpty()||adresse.isEmpty()||login.isEmpty()||password.isEmpty()||role.isEmpty()){
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setTitle("Erreur..!");
             alert.setHeaderText(null);
             alert.setContentText("Vous devez remplir les champs..!");
+            alert.showAndWait();
         }
         else{
         try{
