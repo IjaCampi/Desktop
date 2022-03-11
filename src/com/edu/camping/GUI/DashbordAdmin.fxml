@@ -30,7 +30,7 @@
                               <Button fx:id="btlogout" mnemonicParsing="false" onAction="#deconnecter" prefHeight="56.0" prefWidth="98.0" style="-fx-background-color: #B0C4DE;" text="Log Out" textFill="#1f1f22" BorderPane.alignment="CENTER" />
                            </right>
                            <left>
-                              <Button fx:id="btnprof" mnemonicParsing="false" onMouseClicked="#profile" prefHeight="35.0" prefWidth="122.0" text="Profile" BorderPane.alignment="CENTER" />
+                              <Button fx:id="btnprof" mnemonicParsing="false" onAction="#profile" onMouseClicked="#profile" prefHeight="35.0" prefWidth="122.0" text="Profile" BorderPane.alignment="CENTER" />
                            </left>
                         </BorderPane>
                      </children>
